@@ -1,3 +1,45 @@
+
+def check_uppercase(password):
+    """Checking for uppercase letters."""
+    for char in password:
+        if char.isupper():
+            return True
+    return False
+
+
+def check_lowercase(password):
+    """Checking for lowercase letters."""
+    for char in password:
+        if char.islower():
+            return True
+    return False
+
+
+def check_digit(password):
+    """Checking for digits."""
+    for char in password:
+        if char.isdigit():
+            return True
+    return False
+
+def check_length(password, min_length=8):
+    """Checking the length of the password."""
+    actual_length = len(password)
+    if actual_length >= min_length:
+        return True
+    else:
+        return False
+
+def check_special_char(password):
+    """Checking for special characters."""
+    special_char = "!@#$%^&*()_-+=<>?"
+    for char in password:
+        if char in special_char:
+            return True
+    return False
+
+
+
 # Accepts password
 password = input("Please input your password: ")
 
@@ -5,61 +47,38 @@ password = input("Please input your password: ")
 print(f"Your password is: {password}") 
 
 # Checking the length of the password.
-password_length = len(password)
-print(f"Your password is {password_length} characters long.")
+actual_len = len(password)
+print(f"Your password is {actual_len} characters long.")
+is_length_good = check_length(password)
 
-if password_length < 8:
-    print("Failed length check.")
-    is_length_good = False
-else:
+if is_length_good:
     print("Passed length check.")
-    is_length_good = True
+else:
+    print("Failed length check.")
 
 #Checking to see if there is an uppercase letter.
-has_uppercase = False
-for char in password:
-    if char.isupper():
-        has_uppercase = True
-        break
-
+has_uppercase = check_uppercase(password)
 if has_uppercase:
     print("Passed uppercase check.")
 else:
     print("Failed uppercase check.")
 
 #Checking for a lowercase letter.
-has_lowercase = False
-for char in password:
-    if char.islower():
-        has_lowercase = True
-        break
-
+has_lowercase = check_lowercase(password)
 if has_lowercase:
     print("Passed lowercase check.")
 else:
     print("Failed lowercase check.")
 
 #Checking for a digit.
-has_digit = False
-for char in password:
-    if char.isdigit():
-        has_digit = True
-        break
-
+has_digit = check_digit(password)
 if has_digit:
     print("Passed digit check.")
 else:
     print("Failed digit check.")
 
 #Checking for a special character.
-special_char = "!@#$%^&*()_-+=<>?"
-has_special = False
-
-for char in password:
-    if char in special_char:
-        has_special = True
-        break
-
+has_special = check_special_char(password)
 if has_special:
     print("Passed special character check.")
 else:
@@ -87,13 +106,16 @@ print("\n---Overall Strength Score---")
 print(f"Your password strength score is: {strength_score}/5.")
 
 if strength_score == 5:
-    print("Your password is strong!")
+    print("Password Strength: Strong")
 
 elif strength_score >= 3:
-    print("Your password is medium.")
+    print("Password Strength: Medium")
 
 else:
-    print("Your password is weak.")
+    print("Password Strength: Weak")
+
+print("\n")
+
 
 
 
